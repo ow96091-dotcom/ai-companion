@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AI Companion</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f0f14;
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 18px;
+      background: #171720;
+      border-bottom: 1px solid #292936;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 22px;
+    }
+
+    header p {
+      color: #999;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    #chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 12px 15px;
+      margin-bottom: 12px;
+      border-radius: 16px;
+      line-height: 1.4;
+    }
+
+    .ai {
+      background: #20202b;
+      margin-right: auto;
+    }
+
+    .user {
+      background: #7c3aed;
+      margin-left: auto;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      background: #171720;
+      border-top: 1px solid #292936;
+    }
+
+    input {
+      flex: 1;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid #333;
+      background: #101017;
+      color: white;
+      outline: none;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 12px;
+      background: #7c3aed;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🤖 AI Companion</h1>
+    <p>Your personal AI companion</p>
+  </header>
+
+  <div id="chat">
+    <div class="message ai">
+      Hi! 👋 I'm your AI companion. How are you feeling today?
+    </div>
+  </div>
+
+  <div class="input-area">
+    <input
+      id="messageInput"
+      type="text"
+      placeholder="Type your message..."
+      onkeydown="handleKey(event)"
+    >
+
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    function addMessage(text, type) {
+      const chat = document.getElementById("chat");
+
+      const message = document.createElement("div");
+      message.className = "message " + type;
+      message.textContent = text;
+
+      chat.appendChild(message);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("messageInput");
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      addMessage(text, "user");
+      input.value = "";
+
+      setTimeout(() => {
+        addMessage(
+          "I'm here with you 😊 The AI brain will be connected in the next step.",
+          "ai"
+        );
+      }, 500);
+    }
+
+    function handleKey(event) {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    }
+  </script>
+
+</body>
+</html>
