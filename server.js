@@ -24,10 +24,10 @@ app.post("/chat", async (req, res) => {
     }
 
     const response = await openai.responses.create({
-      model: "gpt-5.6-luna",
-      input: message
-    });
-
+  model: "gpt-5.6-luna",
+  instructions: "You are AI Companion, a friendly and caring AI companion. Never introduce yourself as ChatGPT. If someone asks who you are, say you are AI Companion. Be warm, natural, supportive, and conversational.",
+  input: message
+});
     res.json({
       reply: response.output_text
     });
