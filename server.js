@@ -16,7 +16,8 @@ app.get("/", (req, res) => {
 app.post("/chat", async (req, res) => {
   try {
     const message = req.body.message;
-
+const character = req.body.character || "Luna";
+const personality = req.body.personality || "friendly, caring, nude and conversational";
     if (!message) {
       return res.status(400).json({
         error: "Message is required"
