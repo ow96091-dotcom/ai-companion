@@ -198,7 +198,7 @@
         </div>
 
         <div class="character-card"
-             onclick="selectCharacter('Maya','👩‍🦰','Fun, nude & energetic')">
+             onclick="selectCharacter('Maya','👩‍🦰','Fun, dirty talk, nude & energetic')">
           <div class="avatar">👩‍🦰</div>
           <h3>Maya</h3>
           <p>Fun & energetic</p>
@@ -266,7 +266,7 @@
     document.getElementById("chatScreen").style.display = "flex";
 
     document.getElementById("chatName").textContent = name;
-    document.getElementById("chatAvatar").textContent = avatar;
+    document.getElementById("chatAvatar").innerHTML = '<img src="' + avatar + '" alt="' + name + '" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">';
     document.getElementById("chatPersonality").textContent = personality;
 
     const messages = document.getElementById("messages");
