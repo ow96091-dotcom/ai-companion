@@ -10,6 +10,7 @@ app.use(express.json());
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
+const conversations = {};
 app.get("/", (req, res) => {
   res.send("AI Companion backend is running!");
 });
@@ -26,12 +27,18 @@ const personality =
         error: "Message is required"
       });
     }
-
+const key = character.toLowerCase();
+const history = conversations[key] || [];
     const response = await openai.responses.create({
   model: "gpt-5.6-luna",
   instructions: `You are ${character}, a virtual AI companion. Your personality is: ${personality} Stay in character as ${character} throughout the conversation.`,
-  input: message
+  input: [...history, { role: "user", content: message }]
 });
+    conversations[key] = [
+  ...history,
+  { role: "user", content: message },
+  { role: "assistant", content: response.output_text }
+];
     res.json({
       reply: response.output_text
     });
