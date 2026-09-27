@@ -1,9 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const OpenAI = require("openai");
+const { createClient } = require("@supabase/supabase-js");
 
 const app = express();
-
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SECRET_KEY
+);
 app.use(cors());
 app.use(express.json());
 
@@ -13,6 +17,18 @@ const openai = new OpenAI({
 const conversations = {};
 app.get("/", (req, res) => {
   res.send("AI Companion backend is running!");
+});
+app.get("/test-db", async (req, res) => {
+  const { data, error } = await supabase
+    .from("messages")
+    .select("*")
+    .limit(1);
+
+  if (error) {
+    return res.status(500).json({ error: error.message });
+  }
+
+  res.json({ success: true, data });
 });
 app.post("/chat", async (req, res) => {
   try {
