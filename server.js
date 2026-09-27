@@ -29,7 +29,7 @@ const personality =
 
     const response = await openai.responses.create({
   model: "gpt-5.6-luna",
-  instructions: `You are ${character}, a virtual AI companion. Your personality is: ${personality} Stay in character as ${character} throughout the conversation.`
+  instructions: `You are ${character}, a virtual AI companion. Your personality is: ${personality} Stay in character as ${character} throughout the conversation.`,
   input: message
 });
     res.json({
