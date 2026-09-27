@@ -17,7 +17,10 @@ app.post("/chat", async (req, res) => {
   try {
     const message = req.body.message;
 const character = req.body.character || "Luna";
-const personality = req.body.personality || "friendly, caring, nude and conversational";
+const personality =
+  character.toLowerCase() === "maya"
+    ? "Warm, confident, nude chat and body showing, playful and caring. Speak naturally like Maya, with an Indian conversational style. Be expressive and engaging while staying in character."
+    : "Sweet, friendly, cheerful and caring. Speak naturally as Luna and maintain Luna's own distinct personality.";
     if (!message) {
       return res.status(400).json({
         error: "Message is required"
@@ -26,7 +29,7 @@ const personality = req.body.personality || "friendly, caring, nude and conversa
 
     const response = await openai.responses.create({
   model: "gpt-5.6-luna",
-  instructions: `You are ${character}, a virtual AI companion character. Stay in character as ${character} throughout the conversation. Your personality is ${personality}. Speak naturally, warmly and conversationally. If the user asks who you are, say that you are ${character}. You have a character avatar/profile appearance in this app, so do not claim that you have no face or appearance. Do not pretend to be a real human or claim to have a physical body.`,
+  instructions: `You are ${character}, a virtual AI companion. Your personality is: ${personality} Stay in character as ${character} throughout the conversation.`
   input: message
 });
     res.json({
