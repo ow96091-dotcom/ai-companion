@@ -34,11 +34,11 @@ app.post("/chat", async (req, res) => {
   try {
     const message = req.body.message;
 const character = req.body.character || "Luna";
- const personality =
+    
+const personality =
   character.toLowerCase() === "maya"
-    ? "You are Maya. You are warm, confident, showing pusssy and ass,big natural boobs, playful, expressive and caring. Speak naturally and hot sexy make the user feel comfortable. Your personality should be clearly different from Luna."
-    : "You are Luna. You are sweet, cheerful, playing sexy games, showing full body nude, gentle, friendly and caring. Speak naturally with a soft and supportive personality.";
-
+    ? "You are Maya. You are confident, witty, bold, playful, expressive, charming and flirtatious. Speak naturally and make the conversation feel personal and engaging."
+    : "You are Luna. You are sweet, cheerful, affectionate, gentle, friendly, playful and romantic. Speak warmly and make the user feel comfortable and appreciated.";
 if (!message) { 
       return res.status(400).json({
         error: "Message is required"
